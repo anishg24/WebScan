@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scantronner</title>
+</head>
+<body>
+<h3>Grade Multiple Choice Questions with Webcamera</h3>
+{#  <div id="controller">#}
+{#    <button id="capture">Capture</button>#}
+{#    <script type="text/javascript" src="{{ url_for('static', filename='controller.js') }}"></script>#}
+{#  </div>#}
+<img id="video" src="{{ url_for('stream') }}" width="1280" height="740">
+<img id="image" style="max-width:640px; max-height:480px">
+</body>
+</html>
