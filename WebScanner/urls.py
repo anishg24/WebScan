@@ -17,6 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path("create_exam/", include("ExamMaker.urls")),
+    path("exams/", include("ExamMaker.urls")),
     path('admin/', admin.site.urls),
 ]

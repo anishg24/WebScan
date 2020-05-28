@@ -2,3 +2,6 @@
 /.idea/
 /old_scripts/api/venv/
 /ExamMaker/created_exams/
+
+venv/
+created_exams/
