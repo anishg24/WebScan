@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Exams Taken</th>
+            <th>Subjects Enrolled</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for student in students %}
+            <tr>
+                <td><a href="{% url 'edit_exam' student.pk %}">{{ student.name }}</a></td>
+                <td>{{ student.exams_taken|length }}</td>
+                <td>{{ student.students_enrolled_in_subject|length }}</td>
+            </tr>
+        {% empty %}
+            <tr class="table-active">
+                <td class="align-items-center" colspan="6">No Students Created</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                {% if is_paginated %}
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                            <li class="disabled page-link"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in paginator.page_range %}
+                            {% if page_obj.number == i %}
+                                <li class="active page-link"><span>{{ i }} <span class="sr-only">(current)</span></span>
+                                </li>
+                            {% else %}
+                                <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                            <li class="disabled page-link"><span>&raquo;</span></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div class="col-lg-6">
+                <a href="{% url 'create_student' %}" class="btn btn-success">Create New Subject</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

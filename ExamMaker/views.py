@@ -1,19 +1,17 @@
-from django.http import HttpResponse, FileResponse, Http404, QueryDict
+from django.http import FileResponse, Http404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView, DeleteView
-from django.views.generic.edit import BaseUpdateView
-from django.shortcuts import render
 from rest_framework import viewsets
 from .serializers import ExamSerializer
 
-
 from .models import Test
-from .forms import TestForm
 from .exam import Exam
 
-# class TodoView(viewsets.ModelViewSet):
-#     serializer_class = ExamSerializer
-#     queryset = Test.objects.all()
+
+class TestView(viewsets.ModelViewSet):
+    serializer_class = ExamSerializer
+    queryset = Test.objects.all()
+
 
 class TestListView(ListView):
     model = Test

@@ -15,8 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from ExamMaker import views
+
+router = routers.DefaultRouter()
+router.register(r"exams", views.TestView, "exam")
 
 urlpatterns = [
     path("exams/", include("ExamMaker.urls")),
     path('admin/', admin.site.urls),
+    path("api/", include(router.urls)),
+    path("class/", include("Classroom.urls"))
 ]

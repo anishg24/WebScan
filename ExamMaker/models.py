@@ -1,8 +1,6 @@
 import shutil
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-from django.utils import timezone
-from .exam import Exam
 
 
 # Create your models here.
