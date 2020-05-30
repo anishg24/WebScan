@@ -37,12 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "bootstrap",
     "ExamMaker",
     "Grader",
     "Classroom",
-    "crispy_forms",
     "corsheaders",
+    "drf_yasg",
     "rest_framework"
 ]
 
@@ -128,3 +127,13 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # we whitelist localhost:3000 because that's where frontend will be served
 CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+#     ],
+# }
+
+REST_FRAMEWORK = {
+  'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+}

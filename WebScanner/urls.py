@@ -14,16 +14,33 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls import url
 from django.urls import path, include
-from rest_framework import routers
-from ExamMaker import views
+from ExamMaker import views as exam_views
+from Classroom import views as class_views
+from rest_framework import routers, permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 
 router = routers.DefaultRouter()
-router.register(r"exams", views.TestView, "exam")
+router.register(r"exams", exam_views.TestView, "exam")
+router.register(r"subject", class_views.SubjectView, "subject")
+router.register(r"student", class_views.StudentView, "student")
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="MyAPI",
+        default_version="v1",
+        description="Test Description",
+        contact=openapi.Contact(email="anishg24@gmail.com")
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,)
+)
 
 urlpatterns = [
-    path("exams/", include("ExamMaker.urls")),
     path('admin/', admin.site.urls),
     path("api/", include(router.urls)),
-    path("class/", include("Classroom.urls"))
+    url(r"^", schema_view.with_ui("swagger"), name="schema-swagger-ui"),
+    url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
 ]
